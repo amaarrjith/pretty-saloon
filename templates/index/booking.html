@@ -1,0 +1,125 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pretty - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{%static 'index/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'index/css/animate.css'%}">
+    
+    <link rel="stylesheet" href="{%static 'index/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{%static 'index/css/owl.theme.default.min.css'%}">
+    <link rel="stylesheet" href="{%static 'index/css/magnific-popup.css'%}">
+
+    <link rel="stylesheet" href="{%static 'index/css/aos.css'%}">
+
+    <link rel="stylesheet" href="{%static 'index/css/ionicons.min.css'%}">
+
+    <link rel="stylesheet" href="{%static 'index/css/bootstrap-datepicker.css'%}">
+    <link rel="stylesheet" href="{%static 'index/css/jquery.timepicker.css'%}">
+
+    
+    <link rel="stylesheet" href="{%static 'index/css/flaticon.css'%}">
+    <link rel="stylesheet" href="{%static 'index/css/icomoon.css'%}">
+    <link rel="stylesheet" href="{%static 'index/css/style.css'%}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Pretty</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{%url 'index' %}" class="nav-link">Home</a></li>
+	          
+	          
+              <li class="nav-item"><a href="{%url 'booking' %}" class="nav-link">Book now</a></li>
+	          
+	          <li class="nav-item"><a href="{%url 'contact'%}" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+<section id="booking" class="ftco-section ftco-appointment">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row d-md-flex align-items-center">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                <div class="appointment-info text-center p-5">
+                    <div class="mb-4">
+                        <h3 class="mb-3">Address</h3>
+                        <p>203 Fake St. Mountain View, San Francisco, California, USA</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="mb-3">Phone</h3>
+                        <p class="day"><strong>0000000000</strong> or <strong>0000000000</strong></p>
+                    </div>
+                    <div>
+                        <h3 class="mb-3">Opening Hours</h3>
+                        <p class="day"><strong>Monday - Friday</strong></p>
+                        <span>08:00am - 09:00pm</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 appointment pl-md-5 ftco-animate">
+                <h3 class="mb-3 text-uppercase">Book Appointment</h3>
+                <form action="{% url 'packagebookingaction' %}" class="appointment-form" method="post">
+
+                    {% csrf_token %}
+
+                    <div class="row form-group d-flex">
+                        <div class="col-md-6">
+                            <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="phone" class="form-control" placeholder="Contact No">
+                        </div>
+                    </div>
+                    <div class="row form-group d-flex">
+                        <div class="col-md-6">
+                            <div class="input-wrap">
+                                <div class="icon"><span class="ion-md-calendar"></span></div>
+                                <input type="text" name="date"id="appointment_date" class="form-control" placeholder="Date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="time" name= "time" class="form-control" placeholder="Time"> <!-- Add time field here -->
+                        </div>
+                    </div>
+                    {%for item in subcategory%}
+                    <div class="row form-group d-flex">
+                        <div class="col-md-6">
+                            <input type="text" value="{{item.subcategoryname}}" name= "packagename" class="form-control" placeholder="Package Name" readonly> <!-- Add phone input field here -->
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" value="{{item.rate}}" name = "packagerate" class="form-control" placeholder="Rate" readonly> <!-- Add email input field here -->
+                        </div>
+                        <div class="col-md-6">
+                            <input type="hidden" value="booked" name="status">
+                        </div>
+                    </div>
+                    {%endfor%}
+                    <div class="form-group">
+                        <button type="submit" onclick="book()" value="BOOK NOW" class="btn btn-white btn-outline-white py-3 px-4">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    
+    function book(){
+        alert("Booking Done")
+    }
+</script>
+{% include 'index/footer.html' %}

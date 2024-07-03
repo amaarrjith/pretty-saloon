@@ -1,0 +1,40 @@
+{%include 'admin/header.html'%}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Staff View Table</h4>
+              
+              <div class="table-responsive">
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Staff Name</th>
+                      <th>Role</th>
+                      <th>Description</th>
+                      <th>Profile Image</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for item in stafflist%}
+                    <tr>
+                      <td>{{item.beauticianid}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.role}}</td>
+                      <td>{{item.description}}</td>
+                      <td><img src = "/media/{{item.image}}" ></td>
+                      <td><a href = "{% url 'staffedit' id=item.beauticianid %}"><button class="btn btn-primary">Edit</button></a></td>
+                      <td><a href = "{% url 'staffdelete' id=item.beauticianid %}" ><button class="btn btn-danger">Delete</button></a></td>
+                      
+                    </tr>
+                    {%endfor%}
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>

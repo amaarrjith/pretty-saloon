@@ -1,0 +1,46 @@
+{% include 'admin/header.html' %}
+<div class="main-panel">        
+<div class="content-wrapper">
+<div class="row">
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        {%for item in data%}
+      <div class="card-body">
+        <form class="forms-sample" method="post" action="{%url 'packagelisteditaction' id=item.packagelistid %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+              <label for="exampleInputUsername1">Choose Package Name</label>
+              <select name="package" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                {%for item in packagelist %}
+                <option value="{{item.packageid}}">{{item.packagename}}</option>
+                {% endfor %}
+              </select>
+
+          </div>
+          <div class="form-group">
+            <label for="exampleInputUsername1"> Choose Sub Category </label>
+            <select name="subcategory" class="form-control form-control-lg" id="exampleFormControlSelect1">
+              {%for item in subcategory %}
+              <option value="{{item.subcategoryname}}">{{item.subcategoryname}}</option>
+              {% endfor %}
+            </select>
+        </div>
+      
+          
+          <button type="submit" onclick = "data()" class="btn btn-primary mr-2">Submit</button>
+          <button class="btn btn-light">Cancel</button>
+      </form>
+      {%endfor%}
+    </div>
+    </div>
+  </div>
+</div>
+  
+</div>
+
+<script>
+    function data(){
+        alert("Edited Successfully")
+    }
+</script>
+{% include 'admin/footer.html' %}

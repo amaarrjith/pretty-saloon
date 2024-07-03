@@ -1,0 +1,46 @@
+{% include 'admin/header.html' %}
+    
+    
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                {% for item in subcategorylist%}
+                  <form class="forms-sample" method="post" action="{%url 'subcategoryeditaction' id=item.subcategoryid %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Enter Category</label>
+                        <select name="categoryid" class="form-control form-control-lg" id="exampleFormControlSelect1" value="{{item.categoryid}}">
+                            <option value="">Choose Category</option>
+                            {%for data in categorylist%}
+
+                          <option value="{{data.categoryid}}">{{data.categoryname}}</option>
+                          {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Enter Sub-Category Name</label>
+                        <input type="text" name="subcategoryname" class="form-control" id="exampleInputUsername1" placeholder="Enter Sub-Category Name" value="{{item.subcategoryname}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Enter Rate</label>
+                        <input type="text" name="rate" class="form-control" id="exampleInputUsername1" placeholder="Enter Rate" value="{{item.rate}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Enter Description</label>
+                      <input type="text" name="description" class="form-control" id="exampleInputUsername1" placeholder="Enter Description" value="{{item.subcategorydescription}}">
+                  </div>
+                    
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                  {%endfor%}
+                </div>
+              </div>
+            </div>
+            
+            
+        </div> 
+        {% include 'admin/footer.html' %}

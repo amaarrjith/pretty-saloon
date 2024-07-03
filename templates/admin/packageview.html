@@ -1,0 +1,97 @@
+{%include 'admin/header.html'%}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Package View Table</h4>
+              
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Category Name</th>
+                      <th>Rate</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for item in packageview %}
+                    <tr>
+                      <td>{{item.packageid}}</td>
+                      <td>{{item.packagename}}</td>
+                      <td>{{item.packagerate}}</td>
+                      <td><a href="{% url 'packageedit' id=item.packageid %}"><button class="btn btn-primary">Edit</button></a></td>
+                      <td><a href="{% url 'packagedelete' id=item.packageid %}"><button onclick="delete()" class="btn btn-danger">Delete</button></a></td>
+                      
+                    </tr>
+                    {%endfor%}
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Package List View Table</h4><br>
+                
+                <form class="forms-sample" method="post" action="{%url 'packageviewaction' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Choose Package</label>
+                        <select name="packageid" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                            <option value="">Select Package</option>
+                            {%for item in packageview %}
+                          
+                          <option value="{{item.packageid}}">{{item.packagename}}</option>
+                          {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    </div>
+                    
+                </form>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Package Name</th>
+                        <th>Sub Category Name</th>
+                        
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%for item in packagelist%}
+                      <tr>
+
+                        <td>{{item.packagelistid}}</td>
+                        <td>{{item.packagename}}</td>
+                        <td>{{item.subcategoryname}}</td>
+                        
+                        <td><a href="{% url 'packagelistedit' id=item.packagelistid %}"><button class="btn btn-primary">Edit</button></a></td>
+                        <td><a href="{% url 'packagelistdelete' id=item.packagelistid %}"><button class="btn btn-danger">Delete</button></td>
+                        
+                      </tr>
+                      {%endfor%}
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script>
+        function delete(){
+            alert("Deleted")
+        }
+    </script>
+        {%include 'admin/footer.html'%}

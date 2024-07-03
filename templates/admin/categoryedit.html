@@ -1,0 +1,47 @@
+{% include 'admin/header.html' %}
+    
+    
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                {%for item in categorylist%}
+                <div class="card-body">
+                 
+                  <form class="forms-sample" method="post" action="{%url 'categoryeditaction' id=item.categoryid %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Enter Category Name</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputUsername1" placeholder="Enter Category Name" value="{{item.categoryname}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputImage">Upload Image</label>
+                        <input type="file" name="categoryimage" class="form-control-file" id="exampleInputImage" value="{{item.categoryimage}}">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Enter Category Description</label>
+                      <input type="text" name="description" class="form-control" id="exampleInputUsername1" placeholder="Enter Category Name" value="{{item.categorydescription}}">
+                  </div>
+                  {%endfor%}
+                    
+                
+                    
+                    <button type="submit" onclick="data()" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+                
+              </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function data(){
+        alert("Category Edited Successfully");
+    }
+</script>
+            {% include 'admin/footer.html' %}

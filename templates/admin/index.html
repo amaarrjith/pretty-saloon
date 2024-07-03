@@ -1,0 +1,198 @@
+{% include 'admin/header.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card  d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-calendar icon-lg"></i>
+
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      {%for item in result1 %}
+                      <h5 class=" font-weight-bold">{{item.0}} Bookings</h5>
+                      <p class="mt-2  card-text">For Today</p>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card  d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-star icon-lg"></i>
+
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      {%for item in result2%}
+                      <h5 class=" font-weight-bold">{{item.0}} </h5>
+                      <p class="mt-2  card-text">Pending Work</p>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card r d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-calendar icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      <!-- Calendar will be rendered here -->
+                      {% for item in result %}
+                          <h5 class="font-weight-bold">{{ item.0 }} Bookings</h5>
+                          <p class="mt-2 card-text">Total Bookings</p>
+                      {% endfor %}
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card r d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-star icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      {%for item in result%}
+                      <h5 class=" font-weight-bold">{{item.1}}</h5>
+                      <p class="mt-2  card-text">Total Profit</p>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  
+                  <form id="dateForm" method="post" action="{% url 'dateaction' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="datepicker">Select a Date:</label>
+                        <input type="date" class="form-control" name="date" id="datepicker">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                            ID
+                          </th>
+                          <th>
+                            CUSTOMER NAME
+                          </th>
+                          <th>
+                            PHONE NUMBER
+                          </th>
+                          <th>
+                            SLOT
+                          </th>
+                          <th>
+                            DATE
+                          </th>
+                          <th>
+                            TREATMENT
+                          </th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in package %}
+                        <tr>
+                          <td>
+                            {{item.bookingid}}
+                          </td>
+                          <td>
+                            {{item.name}}
+                          </td>
+                          <td>
+                            {{item.phone}}
+                          </td>
+                          <td>
+                            {{item.time}}
+                          </td>
+                          <td>
+                            {{item.date}}
+                          </td>
+                          <td>
+                            {{item.packagename}}
+                          </td>
+                          {% if item.status == "booked" %}
+                          <td><a href="{%url 'buttonaction' id=item.bookingid %}"><button class="btn btn-success">Done</button></a></td>
+                          {% elif item.status == "done" %}
+                          <td><span>&#10003;</span></td>
+                          {%endif%}
+                        </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row end -->
+          <div class="row">
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card bg-facebook d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-facebook text-white icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      <h5 class="text-white font-weight-bold">2.62 Subscribers</h5>
+                      <p class="mt-2 text-white card-text">You main list growing</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card bg-google d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-google-plus text-white icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      <h5 class="text-white font-weight-bold">3.4k Followers</h5>
+                      <p class="mt-2 text-white card-text">You main list growing</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 grid-margin stretch-card">
+              <div class="card bg-twitter d-flex align-items-center">
+                <div class="card-body py-5">
+                  <div
+                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-twitter text-white icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                      <h5 class="text-white font-weight-bold">3k followers</h5>
+                      <p class="mt-2 text-white card-text">You main list growing</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row end -->
+        </div>
+       
+        <!-- content-wrapper ends -->
+        <!-- partial:./partials/_footer.html -->
+        {% include 'admin/footer.html' %}

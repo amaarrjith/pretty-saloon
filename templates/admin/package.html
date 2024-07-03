@@ -1,0 +1,63 @@
+{% include 'admin/header.html' %}
+    
+    
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 
+                  <form class="forms-sample" method="post" action="{%url 'packageaction' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Enter Package Name</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputUsername1" placeholder="Enter Package Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Enter Package Rate</label>
+                      <input type="text" name="rate" class="form-control" id="exampleInputUsername1" placeholder="Enter Package Rate">
+                  </div>
+                    
+                
+                    
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+                
+              </div>
+            </div>
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <form class="forms-sample" method="post" action="{%url 'packagelistaction' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Choose Package Name</label>
+                        <select name="package" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                          {%for item in package %}
+                          <option value="{{item.packageid}}">{{item.packagename}}</option>
+                          {% endfor %}
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputUsername1"> Choose Sub Category </label>
+                      <select name="subcategory" class="form-control form-control-lg" id="exampleFormControlSelect1">
+                        {%for item in subcategories %}
+                        <option value="{{item.subcategoryname}}">{{item.subcategoryname}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                
+                    
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+              </div>
+              </div>
+            </div>
+          </div>
+            
+        </div>
+        {% include 'admin/footer.html' %}
